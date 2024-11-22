@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProniaMVC.DAL;
 using ProniaMVC.Models;
 using ProniaMVC.ViewModels;
@@ -20,7 +21,8 @@ namespace ProniaMVC.Controllers
             //_contex.SaveChanges();
             HomeVM homeVM = new HomeVM
             {
-                Slides = _contex.Slides.OrderBy(s => s.Order).Take(2).ToList()
+                Slides = _contex.Slides.OrderBy(s => s.Order).Take(2).ToList(),
+                Products=_contex.Products.Include(p=>p.ProductImages).ToList() 
             };
             return View(homeVM);
         }
