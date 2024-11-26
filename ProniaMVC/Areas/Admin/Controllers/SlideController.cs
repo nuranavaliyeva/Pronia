@@ -6,11 +6,11 @@ using ProniaMVC.Models;
 namespace ProniaMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class SlideController1 : Controller
+    public class SlideController : Controller
     {
         private readonly AppDbContex _context;
 
-        public SlideController1(AppDbContex context)
+        public SlideController(AppDbContex context)
         {
             _context = context;
         }
