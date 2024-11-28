@@ -961,10 +961,6 @@
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\300f227c-1add-49c6-bfc4-f14f74b01b10i (1).webp"
     },
     {
-      "Id": "C:\\Users\\Nuran\\Desktop\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\images\\website-images\\9cc488c0-c46f-459f-9097-5212f9bd22a7i (1).webp",
-      "PackagePath": "staticwebassets\\assets\\images\\website-images\\9cc488c0-c46f-459f-9097-5212f9bd22a7i (1).webp"
-    },
-    {
       "Id": "C:\\Users\\Nuran\\Desktop\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\images\\website-images\\car.png",
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\car.png"
     },
@@ -975,6 +971,10 @@
     {
       "Id": "C:\\Users\\Nuran\\Desktop\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\images\\website-images\\dark.png",
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\dark.png"
+    },
+    {
+      "Id": "C:\\Users\\Nuran\\Desktop\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\images\\website-images\\e7dc038f-3cb0-4103-a4ac-0677d39b381cScreenshot 2024-11-13 163958.png",
+      "PackagePath": "staticwebassets\\assets\\images\\website-images\\e7dc038f-3cb0-4103-a4ac-0677d39b381cScreenshot 2024-11-13 163958.png"
     },
     {
       "Id": "C:\\Users\\Nuran\\Desktop\\ProniaMVC\\ProniaMVC\\wwwroot\\assets\\images\\website-images\\i (1).webp",
