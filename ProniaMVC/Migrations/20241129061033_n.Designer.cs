@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProniaMVC.DAL;
 
@@ -11,9 +12,11 @@ using ProniaMVC.DAL;
 namespace ProniaMVC.Migrations
 {
     [DbContext(typeof(AppDbContex))]
-    partial class AppDbContexModelSnapshot : ModelSnapshot
+    [Migration("20241129061033_n")]
+    partial class n
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,14 +112,14 @@ namespace ProniaMVC.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TagId")
+                    b.Property<int?>("ProductImageId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("TagId");
+                    b.HasIndex("ProductImageId");
 
                     b.ToTable("ProductImages");
                 });
@@ -132,12 +135,17 @@ namespace ProniaMVC.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ProductImageId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TagId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("ProductImageId");
 
                     b.HasIndex("TagId");
 
@@ -224,9 +232,9 @@ namespace ProniaMVC.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProniaMVC.Models.Tag", null)
+                    b.HasOne("ProniaMVC.Models.ProductImage", null)
                         .WithMany("ProductImages")
-                        .HasForeignKey("TagId");
+                        .HasForeignKey("ProductImageId");
 
                     b.Navigation("Product");
                 });
@@ -238,6 +246,10 @@ namespace ProniaMVC.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("ProniaMVC.Models.ProductImage", null)
+                        .WithMany("ProductTags")
+                        .HasForeignKey("ProductImageId");
 
                     b.HasOne("ProniaMVC.Models.Tag", "Tag")
                         .WithMany("ProductTags")
@@ -260,10 +272,15 @@ namespace ProniaMVC.Migrations
                     b.Navigation("ProductImages");
                 });
 
-            modelBuilder.Entity("ProniaMVC.Models.Tag", b =>
+            modelBuilder.Entity("ProniaMVC.Models.ProductImage", b =>
                 {
                     b.Navigation("ProductImages");
 
+                    b.Navigation("ProductTags");
+                });
+
+            modelBuilder.Entity("ProniaMVC.Models.Tag", b =>
+                {
                     b.Navigation("ProductTags");
                 });
 #pragma warning restore 612, 618

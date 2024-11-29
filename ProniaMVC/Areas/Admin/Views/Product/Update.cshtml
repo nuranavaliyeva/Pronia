@@ -1,10 +1,10 @@
-﻿@model CreateProductVM
+﻿@model UpdateProductVM
 
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Create Product</h4>
+                <h4 class="card-title">Update Product</h4>
                 <form class="forms-sample" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label asp-for="Name">Name</label>
@@ -24,13 +24,13 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="CategoryId">Category</label>
-                        <select asp-for= "CategoryId" class="form-control"> 
-                           
-                            @foreach(Category category in Model.Categories)
+                        <select asp-for="CategoryId" class="form-control">
+
+                            @foreach (Category category in Model.Categories)
                             {
                                 <option value="@category.Id">@category.Name</option>
                             }
-                            <option selected disabled value="">Choose Category</option>
+                           @*  <option selected disabled value="">Choose Category</option> *@
                         </select>
                         <span asp-validation-for="CategoryId" class="text-danger"></span>
                     </div>
