@@ -1,4 +1,4 @@
-﻿@model List<Category>
+﻿@model List<GetCategoryAdminVM>
 @{
     int count = 0;
 }
@@ -29,7 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                           @foreach (Category category in Model)
+                           @foreach (GetCategoryAdminVM categoryVM in Model)
                             {
                                 count++;
                                 <tr>
@@ -37,14 +37,14 @@
                                       @count
                                     </td>
                                     <td>
-                                        <p>@category.Name</p>
+                                        <p>@categoryVM.Name</p>
                                     </td>
                                     <td>
-                                       <p>@category.Products.Count</p>
+                                       <p>@categoryVM.ProductCount</p>
                                     </td>
                                     <td>
-                                     <a asp-action="update" asp-route-id="@category.Id" class="btn btn-warning"><i class="mdi mdi-grease-pencil"></i></a>
-                                        <a asp-action="delete" asp-route-id="@category.Id" class="btn btn-danger"><i class="mdi mdi-delete"></i></a>
+                                     <a asp-action="update" asp-route-id="@categoryVM.Id" class="btn btn-warning"><i class="mdi mdi-grease-pencil"></i></a>
+                                        <a asp-action="delete" asp-route-id="@categoryVM.Id" class="btn btn-danger"><i class="mdi mdi-delete"></i></a>
                                         <a class="btn btn-secondary"><i class="mdi mdi-information"></i></a>
                                     </td>
                                   

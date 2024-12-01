@@ -1,4 +1,5 @@
-﻿@model List<GetProductAdminVM>
+﻿
+@model List<GetProductAdminVM>
 @{
     int count = 0;
 }
@@ -7,10 +8,11 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Category Table</h4>
+                <h4 class="card-title">
 
+                    <a asp-controller="product" asp-action="Create" class="btn btn-success">Create Product</a>
+                </h4>
                 <div class="table-responsive">
-                    <a asp-action="create" class="btn btn-success ">Create Product</a>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -18,7 +20,7 @@
                                     No
                                 </th>
                                 <th>
-                                    Image
+                                    Product
                                 </th>
                                 <th>
                                     Name
@@ -30,12 +32,14 @@
                                     Category
                                 </th>
                                 <th>
-                                    Settings
+                                    count
                                 </th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (GetProductAdminVM productVM in Model)
+
+                            @foreach (GetProductAdminVM product in Model)
                             {
                                 count++;
                                 <tr>
@@ -43,27 +47,25 @@
                                         @count
                                     </td>
                                     <td>
-                                        <img src="~/assets/images/website-images/@productVM.Image"></img>
+                                        <img src="~/assets/images/website-images/@product.Image">
                                     </td>
                                     <td>
-                                        <p>@productVM.Name</p>
+                                        <p>@product.Name</p>
                                     </td>
                                     <td>
-                                        <p>@productVM.Price</p>
+                                        <p>@product.Price</p>
                                     </td>
                                     <td>
-                                        <p>@productVM.CategoryName</p>
+                                        <p>@product.CategoryName</p>
                                     </td>
-                                   
                                     <td>
-                                        <a asp-action="update" asp-route-id="@productVM.Id" class="btn btn-warning"><i class="mdi mdi-grease-pencil"></i></a>
-                                        <a asp-action="delete" asp-route-id="@productVM.Id" class="btn btn-danger"><i class="mdi mdi-delete"></i></a>
-                                        <a class="btn btn-secondary"><i class="mdi mdi-information"></i></a>
+                                        <a asp-action="update" asp-route-id="@product.Id" class="btn btn-warning"><i class="mdi mdi-grease-pencil"></i></a>
+                                        <a asp-action="delete" class="btn btn-danger" asp-route-id="@product.Id"><i class="mdi mdi-delete"></i></a>
+                                        <a asp-action=update class="btn btn-primary"><i class="mdi mdi-information"></i></a>
                                     </td>
 
                                 </tr>
                             }
-
                         </tbody>
                     </table>
                 </div>

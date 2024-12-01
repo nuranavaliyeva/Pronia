@@ -7,6 +7,18 @@
                 <h4 class="card-title">Create Product</h4>
                 <form class="forms-sample" method="post" enctype="multipart/form-data">
                     <div class="form-group">
+                        <label asp-for="MainPhoto">Main Photo</label>
+                        <input asp-for="MainPhoto" class="form-control" accept="image/*">
+                        <span asp-validation-for="MainPhoto" class="text-danger"></span>
+                    </div
+
+                     <div class="form-group">
+                        <label asp-for="HoverPhoto">Secondary Image</label>
+                        <input asp-for="HoverPhoto" class="form-control" accept="image/*">
+                        <span asp-validation-for="HoverPhoto" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
                         <label asp-for="Name">Name</label>
                         <input asp-for="Name" class="form-control" placeholder="Name" accept="image/*">
                         <span asp-validation-for="Name" class="text-danger"></span>
@@ -33,6 +45,18 @@
                             <option selected disabled value="">Choose Category</option>
                         </select>
                         <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="TagIds">Tags</label>
+                        <select asp-for="TagIds" class="form-control">
+
+                            @foreach (Tag tag in Model.Tags)
+                            {
+                                <option value="@tag.Id">@tag.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="TagIds" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
