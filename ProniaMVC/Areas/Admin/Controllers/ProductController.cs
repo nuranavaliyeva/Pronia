@@ -147,6 +147,9 @@ namespace ProniaMVC.Areas.Admin.Controllers
                 CreatedAt = DateTime.Now,
                 IsDeleted = false,
                 ProductTags = productVM.TagIds.Select(tId =>new ProductTag { TagId = tId }).ToList(),
+                ProductColors = productVM.ColorIds.Select(cId => new ProductColor { ColorId = cId }).ToList(),
+                ProductSizes = productVM.SizeIds.Select(sId => new ProductSize { SizeId = sId }).ToList(),
+
                 ProductImages = new List<ProductImage> { main, hover}
             };
 
@@ -373,7 +376,7 @@ namespace ProniaMVC.Areas.Admin.Controllers
                     .Select(tId => new ProductTag { TagId = tId, ProductId = existed.Id }) );
 
             _contex.ProductColors.AddRange(productVM.ColorIds
-                    .Where(cId => !existed.ProductTags.Exists(pCol => pCol.ColorId == cId))
+                    .Where(cId => !existed.ProductColors.Exists(pCol => pCol.ColorId == cId))
                     .ToList()
                     .Select(cId => new ProductColor { ColorId = cId, ProductId = existed.Id }));
 

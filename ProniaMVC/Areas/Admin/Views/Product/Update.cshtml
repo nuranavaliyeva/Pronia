@@ -2,6 +2,7 @@
 @{
     ProductImage main = Model.ProductImages.FirstOrDefault(pi => pi.IsPrimary == true);
     ProductImage hover = Model.ProductImages.FirstOrDefault(pi => pi.IsPrimary == false);
+
 }
 
 <div class="row">
@@ -19,7 +20,7 @@
                         <label asp-for="MainPhoto">Main Photo</label>
                         <input asp-for="MainPhoto" class="form-control" accept="image/*">
                         <span asp-validation-for="MainPhoto" class="text-danger"></span>
-                    </div
+                    </div>
 
                      <div class="form-group">
                           <img style="width:150px;height:150px;" src="~/assets/images/website-images/@hover.Image" />
@@ -102,7 +103,8 @@
                     </div>
 
 
-                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <button type="submit" class="btn btn-primary me-2 ">Submit</button>
+                    
                     <a asp-action="index" class="btn btn-light">Cancel</a>
                 </form>
             </div>
