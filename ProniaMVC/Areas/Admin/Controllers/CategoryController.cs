@@ -8,6 +8,7 @@ using ProniaMVC.Models;
 namespace ProniaMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AutoValidateAntiforgeryToken]
     public class CategoryController : Controller
     {
         private readonly AppDbContex _context;

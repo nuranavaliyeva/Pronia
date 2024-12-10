@@ -11,7 +11,8 @@ namespace ProniaMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin,Noderator")]
-    
+    [AutoValidateAntiforgeryToken]
+
     public class ProductController : Controller
     {
         private readonly AppDbContex _contex;

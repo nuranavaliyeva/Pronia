@@ -9,6 +9,7 @@ using ProniaMVC.Utilities.Extensions;
 namespace ProniaMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AutoValidateAntiforgeryToken]
     public class SlideController : Controller
     {
         private readonly AppDbContex _context;
