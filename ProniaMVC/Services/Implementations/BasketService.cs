@@ -28,7 +28,8 @@ namespace ProniaMVC.Services.Implementations
             List<BasketItemVM> basketVM = new();
             if (_user.Identity.IsAuthenticated)
             {
-                basketVM = await _context.BasketItems.Where(bi => bi.AppUserId == _user.FindFirstValue(ClaimTypes.NameIdentifier)).Select(bi => new BasketItemVM
+                basketVM = await _context.BasketItems.Where(bi => bi.AppUserId == _user.FindFirstValue(ClaimTypes.NameIdentifier))
+                    .Select(bi => new BasketItemVM
                 {
                     Count = bi.Count,
                     Price = bi.Product.Price,
@@ -58,7 +59,7 @@ namespace ProniaMVC.Services.Implementations
                     {
                         basketVM.Add(new BasketItemVM
                         {
-                            Id = item.Id,
+                            Id = product.Id,
                             Name = product.Name,
                             Image = product.ProductImages[0].Image,
                             Price = product.Price,

@@ -521,9 +521,9 @@ addBtns.forEach(b=>{
 
         var endpoint=this.getAttribute("href")
 
-        s.ajax({
+        $.ajax({
             type:"GET",
-            URL:endpoint
+            url:endpoint
 
         }).done(data => {
                 var cart = document.querySelector("#miniCart")

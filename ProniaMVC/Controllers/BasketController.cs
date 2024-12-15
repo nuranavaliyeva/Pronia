@@ -34,6 +34,7 @@ namespace ProniaMVC.Controllers
         }
         public async Task<IActionResult> AddBasket(int? id)
         {
+            
             if (id == null || id < 1) return BadRequest();
             bool result = await _context.Products.AnyAsync(p => p.Id == id);
             if (!result)
@@ -83,6 +84,7 @@ namespace ProniaMVC.Controllers
                     }
                     else
                     {
+
                         basket.Add(new BasketCookieItemVM()
                         {
                             Id = id.Value,
@@ -108,7 +110,41 @@ namespace ProniaMVC.Controllers
          
             
         }
-      
+       
+
+        public async Task<IActionResult> RemoveBasket(int? id)
+        {
+            if (id == null || id < 1) return BadRequest();
+
+            if (User.Identity.IsAuthenticated)
+            {
+
+              BasketItem item = await _context.BasketItems.FirstOrDefaultAsync(b => b.ProductId == id);
+                if (item is null)
+                {
+                    return NotFound();
+                }
+                _context.BasketItems.Remove(item);
+                await _context.SaveChangesAsync();  
+            }
+            else
+            {
+
+                string cookies = Request.Cookies.ToString();
+
+              List<BasketCookieItemVM> basketcookie=JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(cookies);
+                BasketCookieItemVM item = basketcookie.FirstOrDefault(b => b.Id == id);
+                if(item is null)
+                {
+                    return NotFound();
+                }
+                basketcookie.Remove(item);
+              cookies = JsonConvert.SerializeObject(basketcookie);
+                Response.Cookies.Append("basket",cookies);
+
+            }
+            return RedirectToAction(nameof(Index),"Basket");
+        }
 
         [Authorize(Roles = "Member")]
         public async Task<IActionResult> Checkout()
