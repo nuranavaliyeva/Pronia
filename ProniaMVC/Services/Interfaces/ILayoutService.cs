@@ -7,6 +7,6 @@ namespace ProniaMVC.Services.Interfaces
         Task<Dictionary<string,string>> GetSettingsAsync();
         
 
-        Task<List<BasketItemVM>> GetBasketAsync();
+       
     }
 }
