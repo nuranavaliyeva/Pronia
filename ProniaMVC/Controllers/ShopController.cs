@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProniaMVC.DAL;
 using ProniaMVC.Models;
+using ProniaMVC.Utilities.Exceptions;
 using ProniaMVC.ViewModels;
 
 namespace ProniaMVC.Controllers
@@ -22,8 +23,7 @@ namespace ProniaMVC.Controllers
         {
             if(id == null || id<1)
             {
-                return BadRequest();
-
+                throw new BadRequestException($"{id} id-si yanlisdir");
             }
             Product? product = await _context.Products
                 .Include(p=>p.ProductImages.OrderByDescending(pi=>pi.IsPrimary))
@@ -36,7 +36,7 @@ namespace ProniaMVC.Controllers
                 //.ThenInclude(p=>p.Size)
                 .FirstOrDefaultAsync(p=>p.Id == id);
 
-            if(product is null) return NotFound();
+            if (product is null) throw new NotFoundException($"{id} id-li mehsul yoxdur");
             DetailVM detailVM = new DetailVM
             {
                 Product = product,

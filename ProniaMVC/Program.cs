@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProniaMVC.DAL;
+using ProniaMVC.Middlewares;
 using ProniaMVC.Models;
 using ProniaMVC.Services.Implementations;
 using ProniaMVC.Services.Interfaces;
@@ -29,7 +30,9 @@ builder.Services.AddScoped<IBasketService, BasketService>();
 var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseStaticFiles();
+app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 app.MapControllerRoute
     (
     "admin",

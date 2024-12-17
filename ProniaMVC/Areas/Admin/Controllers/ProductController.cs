@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProniaMVC.Areas.Admin.ViewModels;
-using ProniaMVC.Areas.Admin.ViewModels;
+
 using ProniaMVC.DAL;
 using ProniaMVC.Models;
 using ProniaMVC.Utilities.Extensions;
@@ -10,7 +10,7 @@ using ProniaMVC.Utilities.Extensions;
 namespace ProniaMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin,Noderator")]
+    //[Authorize(Roles = "Admin,Noderator")]
     [AutoValidateAntiforgeryToken]
 
     public class ProductController : Controller
@@ -23,25 +23,45 @@ namespace ProniaMVC.Areas.Admin.Controllers
             _contex = contex;
             _env = env;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page=1)
         {
-            var productVM = await _contex.Products
-                 .Include(p => p.Category)
-                 .Include(p => p.ProductImages)
-                 .Select(p => new GetProductAdminVM
-                 {
-                     Id = p.Id,
-                     Name = p.Name,
-                     Price = p.Price,
-                     CategoryName = p.Category.Name,
-                     Image = p.ProductImages.FirstOrDefault(p=>p.IsPrimary==true).Image
-                 }
-                 )
-                 .ToListAsync();
+            if(page<1) return BadRequest();
+            int count= await _contex.Products.CountAsync();
+            double total = Math.Ceiling((double)count/5);
 
-            return View(productVM);
+           
+
+            if (page > ViewBag.TotalPage) return BadRequest();
+         
+
+           
+            
+
+            PaginatedVM<GetProductAdminVM> paginatedVM = new()
+            {
+                TotalPage = total,
+                CurrentPage = page,
+                Items=await _contex.Products
+                 .Skip((page - 1) * 5)
+                .Take(5)
+                .Include(p => p.Category)
+                .Include(p => p.ProductImages)
+                .Select(p => new GetProductAdminVM
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price,
+                    CategoryName = p.Category.Name,
+                    Image = p.ProductImages.FirstOrDefault(p => p.IsPrimary == true).Image
+                }
+
+                )
+                .ToListAsync()
+            };
+
+            return View(paginatedVM);
         }
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Create()
         {
             CreateProductVM productVM = new CreateProductVM
@@ -206,8 +226,8 @@ namespace ProniaMVC.Areas.Admin.Controllers
             await _contex.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        [Authorize]
-        [Authorize(Roles = "Admin")]
+        //[Authorize]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(int? id)
         {
             if(id == null || id<1)
