@@ -32,7 +32,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseStaticFiles();
-app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+//app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 app.MapControllerRoute
     (
     "admin",
